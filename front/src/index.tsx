@@ -1,7 +1,6 @@
 import React from 'react'
 
-import '@assets/styles/index.css'
-
+// import '@assets/styles/index.css'
 import App from './app'
 import reportWebVitals from './reportWebVitals'
 import setupAxios from './setupAxios'
