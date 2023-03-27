@@ -23,7 +23,6 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('back/package.json', 'yarn.lock') }}
       - name: Install dependencies
         run: |
-          npm config set always-auth=true
           yarn install --frozen-lockfile  --network-timeout 1000000
         env:
           CI: false
