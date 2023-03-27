@@ -1,6 +1,11 @@
 import React from 'react'
 
+<<<<<<< HEAD
 // import '@assets/styles/index.css'
+=======
+import '@assets/styles/index.css'
+
+>>>>>>> 85b8b31 (Initial commit)
 import App from './app'
 import reportWebVitals from './reportWebVitals'
 import setupAxios from './setupAxios'

@@ -1,6 +1,12 @@
 #!/usr/bin/env node
+<<<<<<< HEAD
 import app from './app'
 import { getDatabase } from './helpers/databaseConnection'
+=======
+import { databaseConnection } from '@helpers'
+
+import app from './app'
+>>>>>>> 85b8b31 (Initial commit)
 
 const normalizePort = (port: number) => {
   if (port >= 0) {
@@ -49,6 +55,16 @@ server.listen(port)
 server.on('error', onError)
 server.on('listening', onListening)
 
+<<<<<<< HEAD
 getDatabase().addListener('connect', () => {
   console.info('[starting] Database connected')
 })
+=======
+databaseConnection()
+  .then(() => {
+    console.info('[starting] Connected to database')
+  })
+  .catch(() => {
+    console.info('[starting] Could not connect to database')
+  })
+>>>>>>> 85b8b31 (Initial commit)
