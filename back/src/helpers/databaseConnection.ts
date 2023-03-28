@@ -1,15 +1,13 @@
-import mongoose, { MongooseError } from 'mongoose'
+import { Pool } from 'pg'
 
-export const databaseConnection = async (): Promise<void> => {
-  const mongoUrl: string = decodeURIComponent(process.env.MONGO_URI_ENCODED || '')
+export const getDatabase = (): Pool => {
+  const database = new Pool({
+    user: process.env.PG_USER,
+    host: process.env.PG_HOST,
+    database: process.env.PG_DATABASE,
+    password: process.env.PG_PASSWORD,
+    port: parseInt(process.env.PG_PORT || '5432'),
+  })
 
-  if (mongoUrl === '') {
-    throw new Error('MONGO_URI_ENCODED has not been set')
-  }
-
-  try {
-    await mongoose.connect(mongoUrl)
-  } catch (error: unknown) {
-    console.error((error as MongooseError).message)
-  }
+  return database
 }
