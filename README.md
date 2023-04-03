@@ -1,4 +1,3 @@
-
 # Template React Express
 
 [![CI](https://github.com/Les-Cop1/template-express-react/actions/workflows/ci.yml/badge.svg)](https://github.com/Les-Cop1/template-express-react/actions/workflows/ci.yml)
@@ -40,6 +39,15 @@ Start the front-end
   yarn front:start
 ```
 
+Install new library in backend or front-end
+
+1. Move to the `back` or `front` folder
+2. Run
+
+```bash
+  yarn add library_name
+```
+
 ### URLs :
 
 Server URL : [http://localhost:2000/api](http://localhost:2000/api)
@@ -56,7 +64,7 @@ To deploy this project run
   pm2 deploy ecosystem.json production
 ```
 
-Check  if you can access to the server before trying to deploy.
+Check if you can access to the server before trying to deploy.
 
 ## API Reference
 
@@ -93,4 +101,3 @@ MONGO_URI_ENCODED=""
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-
