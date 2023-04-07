@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 
-const Header: React.FC<any> = ({ setMobileOpen, navItems }) => {
+export const Header: React.FC<any> = ({ setMobileOpen, navItems }) => {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState: any) => !prevState)
   }
@@ -38,5 +38,3 @@ const Header: React.FC<any> = ({ setMobileOpen, navItems }) => {
     </AppBar>
   )
 }
-
-export default Header

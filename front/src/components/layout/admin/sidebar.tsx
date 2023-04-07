@@ -22,7 +22,7 @@ interface Props {
   navItems?: string[]
 }
 
-const SideBar: React.FC<any> = (props: Props) => {
+export const SideBar: React.FC<any> = (props: Props) => {
   const { window, mobileOpen, setMobileOpen, navItems } = props
   const handleDrawerToggle = () => {
     setMobileOpen((prevState: any) => !prevState)
@@ -65,5 +65,3 @@ const SideBar: React.FC<any> = (props: Props) => {
     </Drawer>
   )
 }
-
-export default SideBar

@@ -1,8 +1,9 @@
 import React from 'react'
 
-import { AdminLayout, Layout } from '@components'
+import { Layout } from '@components'
 import { Home, Login, Register, StudentView, Unknown } from '@pages'
 
+import { TeacherView } from './pages/teacherView'
 import { Route, Routes } from 'react-router-dom'
 
 const App: React.FC = () => (
@@ -12,9 +13,8 @@ const App: React.FC = () => (
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
     </Route>
-    <Route path="admin" element={<AdminLayout />}>
-      <Route path="student" element={<StudentView />} />
-    </Route>
+    <Route path="student" element={<StudentView />} />
+    <Route path="teacher" element={<TeacherView />} />
     <Route path="*" element={<Unknown />} />
   </Routes>
 )

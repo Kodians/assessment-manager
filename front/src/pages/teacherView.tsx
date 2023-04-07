@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography'
 
 const navItems = ['Home', 'About', 'Contact']
 
-export const StudentView: React.FC = () => {
+export const TeacherView: React.FC = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
   return (
@@ -21,7 +21,7 @@ export const StudentView: React.FC = () => {
       </Box>
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
-        <Typography>STUDENT VIEW</Typography>
+        <Typography>TEACHER VIEW</Typography>
       </Box>
     </Box>
   )
