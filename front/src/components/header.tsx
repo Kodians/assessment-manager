@@ -6,6 +6,7 @@ import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
+import { NavLink } from '@types'
 
 export const Header: React.FC<any> = ({ setMobileOpen, navItems }) => {
   const handleDrawerToggle = () => {
@@ -28,9 +29,9 @@ export const Header: React.FC<any> = ({ setMobileOpen, navItems }) => {
           MUI
         </Typography>
         <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-          {navItems.map((item: string) => (
-            <Button key={item} sx={{ color: '#fff' }}>
-              {item}
+          {navItems.map((item: NavLink) => (
+            <Button key={item.id} sx={{ color: '#fff' }}>
+              {item.label}
             </Button>
           ))}
         </Box>

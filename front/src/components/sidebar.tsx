@@ -8,6 +8,7 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import Typography from '@mui/material/Typography'
+import { NavLink } from '@types'
 
 const drawerWidth = 240
 
@@ -19,7 +20,7 @@ interface Props {
   window?: () => Window
   mobileOpen?: any
   setMobileOpen?: any
-  navItems?: string[]
+  navItems?: NavLink[]
 }
 
 export const SideBar: React.FC<any> = (props: Props) => {
@@ -34,10 +35,10 @@ export const SideBar: React.FC<any> = (props: Props) => {
       </Typography>
       <Divider />
       <List>
-        {navItems?.map((item) => (
-          <ListItem key={item} disablePadding>
+        {navItems?.map((item: NavLink) => (
+          <ListItem key={item.id} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
+              <ListItemText primary={item.label} />
             </ListItemButton>
           </ListItem>
         ))}

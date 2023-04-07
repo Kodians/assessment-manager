@@ -1,4 +1,4 @@
 export * from './authenticated'
 export * from './layout'
-export * from './layout/admin/header'
-export * from './layout/admin/sidebar'
+export * from './header'
+export * from './sidebar'
