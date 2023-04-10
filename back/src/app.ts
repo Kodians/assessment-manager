@@ -36,9 +36,4 @@ app.use('/api/authenticate', authenticationRouter)
 app.use('/api/user', userRouter)
 app.use('/api/class', classRouter)
 
-createClass({
-  class_name: 'M1MIAA',
-  class_description: 'M1 Miage en apprentissage',
-})
-
 export default app
