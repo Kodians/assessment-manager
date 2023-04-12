@@ -4,7 +4,6 @@ import { getCorsOptions } from '@helpers'
 import { authenticationRouter, classRouter, indexRouter, userRouter } from '@routes'
 import { Express } from '@types'
 
-import { createClass } from './models/class'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import dotenv from 'dotenv'

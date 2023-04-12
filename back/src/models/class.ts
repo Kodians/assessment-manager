@@ -9,8 +9,8 @@ import { QueryResult } from 'pg'
  * @returns Promise<object>
  */
 export const createClass = async (classData: IClass): Promise<ResponseType<IClass>> => {
-  const db = await getDatabase()
-  const { class_name, class_description } = classData
+  const db = getDatabase()
+  const { className, classDescription } = classData
 
   let response: ResponseType<IClass> = {
     success: false,
@@ -18,7 +18,7 @@ export const createClass = async (classData: IClass): Promise<ResponseType<IClas
   try {
     const query = {
       text: 'INSERT INTO assessment_db.class(class_name, class_description) VALUES($1, $2) RETURNING *',
-      values: [class_name, class_description],
+      values: [className, classDescription],
     }
 
     const result: QueryResult<IClass> = await db.query(query)
@@ -34,6 +34,7 @@ export const createClass = async (classData: IClass): Promise<ResponseType<IClas
   } finally {
     await db.end()
   }
+
   return response
 }
 
