@@ -1,9 +1,10 @@
 import express from 'express'
 
 import { getCorsOptions } from '@helpers'
-import { authenticationRouter, indexRouter, userRouter } from '@routes'
+import { authenticationRouter, classRouter, indexRouter, userRouter } from '@routes'
 import { Express } from '@types'
 
+import { createClass } from './models/class'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import dotenv from 'dotenv'
@@ -33,5 +34,6 @@ app.use(cookieParser())
 app.use('/api', indexRouter)
 app.use('/api/authenticate', authenticationRouter)
 app.use('/api/user', userRouter)
+app.use('/api/class', classRouter)
 
 export default app
