@@ -27,10 +27,7 @@ export const createClass = async (classData: IClass): Promise<ResponseType<IClas
       data: result.rows[0],
     }
   } catch (error: Error | any) {
-    response = {
-      success: false,
-      error: error.message,
-    }
+    throw new Error(error.message)
   } finally {
     await db.end()
   }

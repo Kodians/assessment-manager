@@ -33,6 +33,6 @@ app.use(cookieParser())
 app.use('/api', indexRouter)
 app.use('/api/authenticate', authenticationRouter)
 app.use('/api/user', userRouter)
-app.use('/api/class', classRouter)
+app.use('/api/classes', classRouter)
 
 export default app

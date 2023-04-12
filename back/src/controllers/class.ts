@@ -11,10 +11,11 @@ export const addClass = async (req: Request, res: Response): Promise<void> => {
   try {
     const classData = <IClass>req.body
     const queryResult = await createClass(classData)
-    response = { ...response, data: queryResult }
+    response = { ...response, success: queryResult.success, data: queryResult.data }
     res.status(201).json(response)
-  } catch (error: unknown) {
-    response = { ...response, success: false }
+  } catch (error: any) {
+    console.error(error)
+    response = { ...response, success: false, error }
     res.status(400).json(response)
   }
 }
