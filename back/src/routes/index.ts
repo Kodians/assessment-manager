@@ -20,6 +20,6 @@ router.get('/', (_req: Request, res: Response) => {
 })
 
 export { router as indexRouter }
-export * from './authentication'
+// export * from './authentication'
 export * from './user'
 export * from './class'

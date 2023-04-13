@@ -1,28 +1,14 @@
-import { Document } from 'mongoose'
-
-export interface IUser extends Document {
-  username: string
+export interface IUser {
+  userId?: number
+  active: boolean
+  login: string
   password: string
-  permission: number
-}
-
-export interface IGetUserInput {
-  _id?: IUser['_id']
-  username?: IUser['username']
-  permission?: IUser['permission']
-}
-
-export interface ICreateUserInput {
-  username: IUser['username']
-  password: IUser['password']
-  confirmation: IUser['password']
-  permission: IUser['permission']
-}
-
-export interface IUpdateUserInput {
-  username?: IUser['username']
-  password?: IUser['password']
-  oldpassword?: IUser['password']
-  confirmation?: IUser['password']
-  permission?: IUser['permission']
+  firstname: string
+  lastname: string
+  createdDate: Date
+  lastLogin: Date
+  classId: number
+  role: string
+  token: string
+  tokenExpiration: Date
 }
