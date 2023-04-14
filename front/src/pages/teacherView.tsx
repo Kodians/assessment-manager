@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import { Header } from '@components'
 import { SideBar } from '@components'
+import { MultipleChoixQuestion } from '@components'
 import { teacherViewRoutes } from '@constants'
 import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -21,6 +22,9 @@ export const TeacherView: React.FC = () => {
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
         <Typography>TEACHER VIEW</Typography>
+        <Box>
+          <MultipleChoixQuestion />
+        </Box>
       </Box>
     </Box>
   )
