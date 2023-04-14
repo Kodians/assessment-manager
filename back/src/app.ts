@@ -10,6 +10,8 @@ import dotenv from 'dotenv'
 import rateLimit from 'express-rate-limit'
 import * as path from 'path'
 
+//import { findClasses } from './models/class'
+
 dotenv.config({ path: path.join(__dirname, '/../../.env') })
 
 const app: Express = express()
