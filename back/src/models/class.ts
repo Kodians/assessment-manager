@@ -39,7 +39,20 @@ export const createClass = async (classData: IClass): Promise<ResponseType<IClas
  * @description find all classes
  * @returns Promise<object>
  */
-export const findClasses = async (): Promise<any> => {}
+export const findClasses = async (): Promise<any> => {
+  const db = getDatabase()
+  const result = await db.query('select * from assessment_db.class')
+  //const listClass: IClass[] = [];
+  /* for (const row of result.rows) {
+    const classItem: IClass = {
+      classId: row.class_id,
+      className: row.class_name,
+      classDescription: row.class_description,
+    }
+    listClass.push(classItem);
+  }  */
+  return result
+}
 
 /**
  * @description find class by id
