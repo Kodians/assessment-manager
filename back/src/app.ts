@@ -1,7 +1,7 @@
 import express from 'express'
 
 import { getCorsOptions } from '@helpers'
-import { classRouter, indexRouter, userRouter } from '@routes'
+import { classRouter, indexRouter, moduleRouter, userRouter } from '@routes'
 import { Express } from '@types'
 
 import cookieParser from 'cookie-parser'
@@ -36,5 +36,6 @@ app.use('/api', indexRouter)
 // app.use('/api/authenticate', authenticationRouter)
 app.use('/api/user', userRouter)
 app.use('/api/classes', classRouter)
+app.use('/api/module', moduleRouter)
 
 export default app
