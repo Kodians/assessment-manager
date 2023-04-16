@@ -17,6 +17,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@mui/icons-material": "^5.11.16",
     "axios": "^0.25.0",
     "moment": "^2.29.1"
   },
