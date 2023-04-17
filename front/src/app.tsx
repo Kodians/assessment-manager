@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Layout } from '@components'
-import { Home, Question, StudentView, TeacherView, Unknown } from '@pages'
+import { Home, Module, Question, StudentView, TeacherView, Unknown } from '@pages'
 
 import { Route, Routes } from 'react-router-dom'
 
@@ -13,6 +13,7 @@ const App: React.FC = () => (
     <Route path="student" element={<StudentView />} />
     <Route path="teacher" element={<TeacherView />} />
     <Route path="question" element={<Question />} />
+    <Route path="module" element={<Module />} />
 
     <Route path="*" element={<Unknown />} />
   </Routes>
