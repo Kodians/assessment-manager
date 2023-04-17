@@ -18,7 +18,7 @@ export const AddAndEditModuleForm = () => {
   const [name, setName] = React.useState({
     label: '',
     description: '',
-    classe: '',
+    classe: [],
   })
 
   const handleLabelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,13 +32,12 @@ export const AddAndEditModuleForm = () => {
   }
 
   const handleClasseChange = (event: any) => {
-    const value = event.target.value as string
-    setName({ ...name, classe: value })
+    setName((prevName) => ({ ...prevName, classe: event.target.value }))
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setName({ label: '', description: '', classe: '' })
+    setName({ label: '', description: '', classe: [] })
   }
 
   const onClose = () => void 0
@@ -67,18 +66,16 @@ export const AddAndEditModuleForm = () => {
               rows={4}
               sx={{ mb: 1 }}
             />
+            <label>Classe</label>
             <FormControl sx={{ width: '450px', marginBottom: 1 }}>
-              <InputLabel id="classe-label">Classe</InputLabel>
               <Select
-                labelId="classe-label"
                 id="classe"
                 value={name.classe}
-                label="Classe"
                 onChange={handleClasseChange}
                 renderValue={(selected) => (
-                  <div>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                     {(selected as unknown as string[]).map((value) => (
-                      <Chip key={value} label={value} sx={{ marginRight: 0.5 }} />
+                      <Chip key={value} label={value} />
                     ))}
                   </div>
                 )}

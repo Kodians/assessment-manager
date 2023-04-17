@@ -11,6 +11,7 @@ export const Home: React.FC = () => {
       <h1>Home page</h1>
       {user && <h2>Hello {user.username}</h2>}
       <Auth />
+      <AddAndEditModuleForm />
     </div>
   )
 }
