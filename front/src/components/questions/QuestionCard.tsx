@@ -15,11 +15,20 @@ import {
   Typography,
 } from '@mui/material'
 
-export const QuestionCard = ({ questionNumber, deleteQuestion }: any) => {
-  const [questionType, setQuestionType] = useState('multiple')
+enum QuestionType {
+  multiple = 'Question choix multiple',
+  ouverte = 'Question ouverte',
+}
+
+export const QuestionCard = ({ questionNumber, deleteQuestion, question, setQuestions }: any) => {
+  const [questionType, setQuestionType] = useState<string>(QuestionType.ouverte)
 
   const handleChangeQuestionType = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuestionType((event.target as HTMLInputElement).value)
+    setQuestionType(event.target.value)
+  }
+
+  const removeQuestion = () => {
+    deleteQuestion(question)
   }
 
   return (
@@ -40,8 +49,8 @@ export const QuestionCard = ({ questionNumber, deleteQuestion }: any) => {
                   onChange={handleChangeQuestionType}
                   name="radio-buttons-group"
                 >
-                  <FormControlLabel value="multiple" control={<Radio />} label="Question choix multiple" />
-                  <FormControlLabel value="ouverte" control={<Radio />} label="Question ouverte" />
+                  <FormControlLabel value={QuestionType.multiple} control={<Radio />} label={QuestionType.multiple} />
+                  <FormControlLabel value={QuestionType.ouverte} control={<Radio />} label={QuestionType.ouverte} />
                 </RadioGroup>
               </FormControl>
             </Grid>
@@ -53,27 +62,23 @@ export const QuestionCard = ({ questionNumber, deleteQuestion }: any) => {
               variant="contained"
               fullWidth
               sx={{ maxWidth: 100, padding: 0 }}
-              onClick={deleteQuestion}
+              onClick={removeQuestion}
             >
               Supprimer
             </Button>
           </Box>
         </CardContent>
 
-        {questionType === 'multiple' ? (
+        {questionType.includes(QuestionType.multiple) ? (
           <CardContent>
-            <MultipleChoixQuestion></MultipleChoixQuestion>
+            <MultipleChoixQuestion question={question} setQuestions={setQuestions} />
           </CardContent>
         ) : (
           <CardContent>
-            <OpenQuestion></OpenQuestion>
+            <OpenQuestion question={question} setQuestions={setQuestions} />
           </CardContent>
         )}
       </Card>
     </>
   )
 }
-
-// QuestionCard.propTypes = {
-//     questionNumber: PropTypes.number
-// }

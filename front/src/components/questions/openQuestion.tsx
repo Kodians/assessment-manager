@@ -2,11 +2,18 @@ import React from 'react'
 
 import { TextField } from '@mui/material'
 
-export const OpenQuestion = () => {
-  const [openQuestion, setOpenQuestion] = React.useState('')
+export const OpenQuestion = ({ question, setQuestions }: any) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
-    setOpenQuestion(value)
+    setQuestions((prevQuestions: any) => {
+      const newQuestions = prevQuestions.map((prevQuestion: any) => {
+        if (prevQuestion.id === question.id) {
+          return { ...prevQuestion, question: value }
+        }
+        return prevQuestion
+      })
+      return newQuestions
+    })
   }
   return (
     <div style={{ display: 'flex' }}>
@@ -17,7 +24,7 @@ export const OpenQuestion = () => {
         size="small"
         id="openQuestion"
         variant="outlined"
-        value={openQuestion}
+        value={question.question}
         onChange={handleChange}
       />
     </div>
