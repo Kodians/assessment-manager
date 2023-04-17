@@ -28,7 +28,7 @@ export const AddAndEditModuleForm = () => {
   return (
     <Card>
       <CardContent>
-        <h2>Modifier un module</h2>
+        <h2>Module</h2>
         <Divider />
         <div style={{ display: 'flex', margin: '15px' }}>
           <form
@@ -39,10 +39,10 @@ export const AddAndEditModuleForm = () => {
             }}
           >
             <label>Libellé</label>
-            <TextField style={{ width: '450px' }} value={name.label} onChange={handleLabelChange} sx={{ mb: 1 }} />
+            <TextField style={{ minWidth: '300px' }} value={name.label} onChange={handleLabelChange} sx={{ mb: 1 }} />
             <label>Description</label>
             <TextField
-              style={{ width: '450px' }}
+              style={{ minWidth: '300px' }}
               value={name.description}
               onChange={handleDescriptionChange}
               multiline
