@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AddAndEditModuleForm, Auth } from '@components'
+import { Auth } from '@components'
 import { useAuth } from '@hooks'
 
 export const Home: React.FC = () => {
@@ -11,7 +11,6 @@ export const Home: React.FC = () => {
       <h1>Home page</h1>
       {user && <h2>Hello {user.username}</h2>}
       <Auth />
-      <AddAndEditModuleForm />
     </div>
   )
 }

@@ -1,33 +1,32 @@
 import React from 'react'
 
-import { useAuth } from '@hooks'
+import { Header } from '@components'
+import { SideBar } from '@components'
+import { teacherViewRoutes } from '@constants'
+// import { useAuth } from '@hooks'
+import { Box, Toolbar } from '@mui/material'
+import CssBaseline from '@mui/material/CssBaseline'
 
-import { Link, Outlet } from 'react-router-dom'
+interface LayoutProps {
+  children: React.ReactNode
+}
 
-export const Layout: React.FC = () => {
-  const { user } = useAuth()
+export const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
+  // const { user } = useAuth()
+  const [mobileOpen, setMobileOpen] = React.useState(false)
   return (
     <>
-      <div className="flex">
-        <Link to={'/'} className="p-2">
-          Home
-        </Link>
-        {user ? (
-          <Link to={'/logout'} className="p-2">
-            Logout
-          </Link>
-        ) : (
-          <>
-            <Link to={'/login'} className="p-2">
-              Login
-            </Link>
-            <Link to={'/register'} className="p-2">
-              Register
-            </Link>
-          </>
-        )}
-      </div>
-      <Outlet />
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <Header setMobileOpen={setMobileOpen} navItems={teacherViewRoutes} />
+        <Box component="nav">
+          <SideBar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} navItems={teacherViewRoutes} />
+        </Box>
+        <Box component="main" sx={{ p: 3 }}>
+          <Toolbar />
+          {children}
+        </Box>
+      </Box>
     </>
   )
 }

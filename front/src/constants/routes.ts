@@ -1,22 +1,22 @@
 export const teacherViewRoutes = [
   {
     id: 'class',
-    path: '/class',
-    label: 'Class',
+    path: 'classes',
+    label: 'Classes',
   },
   {
     id: 'modules',
-    path: '/modules',
+    path: 'modules',
     label: 'Modules',
   },
   {
     id: 'interrogations',
-    path: '/interrogations',
+    path: 'interrogations',
     label: 'Interrogations',
   },
   {
     id: 'copies',
-    path: '/copies',
+    path: 'copies',
     label: 'Copies',
   },
 ]
@@ -24,7 +24,7 @@ export const teacherViewRoutes = [
 export const studentViewRoutes = [
   {
     id: 'interro',
-    path: '/interro',
+    path: 'interro',
     label: 'Interrogations',
   },
 ]
