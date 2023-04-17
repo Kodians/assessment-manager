@@ -2,6 +2,8 @@ import React from 'react'
 
 import { QuestionCard } from '@components'
 import { AssessmentRelatedClassAndModuleContainter, SharedModal } from '@components'
+import { getSize } from '@helpers'
+import { useMutation } from '@hooks'
 import { IconButton } from '@mui/material'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -12,26 +14,51 @@ import Typography from '@mui/material/Typography'
 
 import { ImCancelCircle } from 'react-icons/im'
 
-// import { AiOutlineMinus } from 'react-icons/ai'
+type TypeQuestion = Array<{
+  id: number
+  type: string
+  question: string
+  responses?: Array<{ id: number; text: string }>
+}>
 
 export const Question = () => {
-  const [questions, setQuestions] = React.useState([{ number: 1, type: 'multiple' }])
+  const [questions, setQuestions] = React.useState<TypeQuestion>([
+    {
+      id: 1,
+      type: 'Question choix multiple',
+      question: '',
+      responses: [
+        { id: 1, text: '' },
+        { id: 2, text: '' },
+      ],
+    },
+    {
+      id: 2,
+      type: 'Question ouverte',
+      question: '',
+    },
+    {
+      id: 3,
+      type: 'Question choix multiple',
+      question: '',
+      responses: [
+        { id: 1, text: '' },
+        { id: 2, text: '' },
+      ],
+    },
+  ])
+
+  const [assessmentName, setAssessmentName] = React.useState<string>('')
+
+  const { mutate } = useMutation('http://localhost:3000/api/assessments', {
+    method: 'POST',
+  })
 
   const gridRef = React.useRef<HTMLDivElement>(null)
   const [open, setOpen] = React.useState(false)
 
-  const getSize = () => {
-    if (gridRef.current) {
-      const { width } = gridRef.current.getBoundingClientRect()
-      if (width < 600) {
-        return 'small'
-      } else if (width < 800) {
-        return 'medium'
-      } else {
-        return 'large'
-      }
-    }
-    return 'small'
+  const handleAssessmentName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAssessmentName(event.target.value)
   }
 
   const handleOpenShareModal = () => {
@@ -39,14 +66,31 @@ export const Question = () => {
   }
 
   const addQuestion = () => {
-    const newQuestion = { number: questions.length + 1, type: 'multiple' }
+    const newQuestion = {
+      id: questions.length + 1,
+      type: 'Question choix multiple',
+      question: '',
+      responses: [
+        { id: 1, text: '' },
+        { id: 2, text: '' },
+      ],
+    }
     setQuestions([...questions, newQuestion])
   }
 
-  // const deleteQuestion = (question: any) => {
-  //   const tab = questions.filter(q => q.number !== question.number);
-  //   setQuestions(tab);
-  // }
+  const deleteQuestion = (question: any) => {
+    setQuestions((prevQuestions: any) => {
+      const newQuestions = prevQuestions.filter((prevQuestion: any) => prevQuestion.id !== question.id)
+      return newQuestions
+    })
+  }
+
+  const saveQuestions = () => {
+    mutate({
+      name: assessmentName,
+      questions,
+    })
+  }
 
   return (
     <>
@@ -65,23 +109,37 @@ export const Question = () => {
             <Typography>Nom interrogation:</Typography>
           </Grid>
           <Grid item>
-            <TextField placeholder="Saisissez le nom de l'interrogation" sx={{ width: 300 }} />
+            <TextField
+              placeholder="Saisissez le nom de l'interrogation"
+              sx={{ width: 300 }}
+              value={assessmentName}
+              onChange={handleAssessmentName}
+            />
           </Grid>
         </Grid>
-        <Box display="flex" justifyContent="flex-end">
-          <Button type="button" variant="contained" fullWidth sx={{ maxWidth: 200, padding: 0 }} onClick={addQuestion}>
-            Ajouter une question
-          </Button>
-        </Box>
         <Box mt={3}>
           {questions.map((question) => (
-            <QuestionCard questionNumber={question.number} key={question.number}></QuestionCard>
+            <QuestionCard
+              questionNumber={question.id}
+              question={question}
+              setQuestions={setQuestions}
+              deleteQuestion={deleteQuestion}
+              key={question.id}
+            />
           ))}
+        </Box>
+        <Box display="flex" justifyContent="flex-end" sx={{ '& > button': { marginLeft: 2 } }}>
+          <Button type="button" variant="contained" size="medium" onClick={addQuestion}>
+            Ajouter une question
+          </Button>
+          <Button type="button" variant="contained" size="medium" onClick={saveQuestions}>
+            Valider
+          </Button>
         </Box>
       </Paper>
       <div ref={gridRef}>
         {open && (
-          <SharedModal open={open} closeModal={() => setOpen(false)} size={getSize()}>
+          <SharedModal open={open} closeModal={() => setOpen(false)} size={getSize(gridRef)}>
             <Grid container>
               <Grid container item justifyContent={'space-between'} alignItems={'center'} sx={{ mb: '1rem' }}>
                 <Grid item>

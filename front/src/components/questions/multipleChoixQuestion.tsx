@@ -4,57 +4,78 @@ import { Button, Grid, Paper, TextField, Typography } from '@mui/material'
 
 import { AiOutlineMinus } from 'react-icons/ai'
 
-export const MultipleChoixQuestion = () => {
-  const [multipleChoiceQuestion, setMultipleChoiceQuestion] = React.useState({
-    question: '',
-    responses: [
-      { id: 1, text: '' },
-      { id: 2, text: '' },
-      { id: 3, text: '' },
-      { id: 4, text: '' },
-    ],
-  })
-
+export const MultipleChoixQuestion = ({ question, setQuestions }: any) => {
+  // Ajouter une réponse
   const addMoreAnswers = () => {
-    setMultipleChoiceQuestion((prevMultipleChoiceQuestion) => {
-      const { responses } = prevMultipleChoiceQuestion
-      const newResponses = [...responses, { id: responses.length + 1, text: '' }]
-      return { ...prevMultipleChoiceQuestion, responses: newResponses }
+    setQuestions((prevQuestions: any) => {
+      const newQuestions = prevQuestions.map((prevQuestion: any) => {
+        if (prevQuestion.id === question.id) {
+          return {
+            ...prevQuestion,
+            responses: [...prevQuestion.responses, { id: prevQuestion.responses.length + 1, text: '' }],
+          }
+        }
+        return prevQuestion
+      })
+      return newQuestions
     })
   }
 
+  // Supprimer une réponse
   const removeAnswer = (id: number) => {
-    setMultipleChoiceQuestion((prevMultipleChoiceQuestion) => {
-      const { responses } = prevMultipleChoiceQuestion
-      const index = responses.findIndex((response) => response.id === id)
-      if (index === -1 || responses.length === 1) {
-        return prevMultipleChoiceQuestion
-      }
-      return {
-        ...prevMultipleChoiceQuestion,
-        responses: [...responses.slice(0, index), ...responses.slice(index + 1)],
-      }
+    setQuestions((prevQuestions: any) => {
+      const newQuestions = prevQuestions.map((prevQuestion: any) => {
+        if (prevQuestion.id === question.id) {
+          const { responses } = prevQuestion
+          const index = responses.findIndex((response: any) => response.id === id)
+          if (index === -1 || responses.length === 1) {
+            return prevQuestion
+          }
+          return {
+            ...prevQuestion,
+            responses: [...responses.slice(0, index), ...responses.slice(index + 1)],
+          }
+        }
+        return prevQuestion
+      })
+      return newQuestions
     })
   }
 
+  // Modifier une question ou une réponse
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id } = event.target
-    if (id === multipleChoiceQuestion.question) {
-      setMultipleChoiceQuestion((prevMultipleChoiceQuestion) => ({
-        ...prevMultipleChoiceQuestion,
-        question: value,
-      }))
-      return
-    }
-    setMultipleChoiceQuestion((prevMultipleChoiceQuestion) => {
-      const { responses } = prevMultipleChoiceQuestion
-      const newResponses = responses.map((response) => {
-        if (response.id === Number(id)) {
-          return { ...response, text: value }
+
+    // changer la question
+    setQuestions((prevQuestions: any) => {
+      const newQuestions = prevQuestions.map((prevQuestion: any) => {
+        if (prevQuestion.id === question.id) {
+          const { question } = prevQuestion
+          if (question === id) {
+            return { ...prevQuestion, question: value }
+          }
         }
-        return response
+        return prevQuestion
       })
-      return { ...prevMultipleChoiceQuestion, responses: newResponses }
+      return newQuestions
+    })
+
+    // Modifier une réponse
+    setQuestions((prevQuestions: any) => {
+      const newQuestions = prevQuestions.map((prevQuestion: any) => {
+        if (prevQuestion.id === question.id) {
+          const { responses } = prevQuestion
+          const newResponses = responses.map((response: any) => {
+            if (response.id === Number(id)) {
+              return { ...response, text: value }
+            }
+            return response
+          })
+          return { ...prevQuestion, responses: newResponses }
+        }
+        return prevQuestion
+      })
+      return newQuestions
     })
   }
 
@@ -66,11 +87,7 @@ export const MultipleChoixQuestion = () => {
         </Grid>
         <Grid item>
           <Typography>
-            <TextField
-              placeholder="Saisissez la question"
-              id={multipleChoiceQuestion.question}
-              onChange={handleChange}
-            />
+            <TextField placeholder="Saisissez la question" id={question.question} onChange={handleChange} />
           </Typography>
         </Grid>
       </Grid>
@@ -79,7 +96,7 @@ export const MultipleChoixQuestion = () => {
           <Typography sx={{ width: 80 }}>Choix : </Typography>
         </Grid>
         <Grid item>
-          {multipleChoiceQuestion.responses.map((response) => (
+          {question?.responses?.map((response: any) => (
             <div key={response.id} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 30 }}>
               <TextField
                 placeholder="Saisissez une réponse"
@@ -87,7 +104,7 @@ export const MultipleChoixQuestion = () => {
                 id={response.id.toString()}
                 onChange={handleChange}
               />
-              {multipleChoiceQuestion.responses.length > 1 && (
+              {question?.responses.length > 1 && (
                 <Button type="button" onClick={() => removeAnswer(response.id)} sx={{ width: 10, padding: 0 }}>
                   <AiOutlineMinus />
                 </Button>
