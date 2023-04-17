@@ -3,6 +3,7 @@ import React from 'react'
 import { QuestionCard } from '@components'
 import { AssessmentRelatedClassAndModuleContainter, SharedModal } from '@components'
 import { getSize } from '@helpers'
+import { useMutation } from '@hooks'
 import { IconButton } from '@mui/material'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -47,8 +48,18 @@ export const Question = () => {
     },
   ])
 
+  const [assessmentName, setAssessmentName] = React.useState<string>('')
+
+  const { mutate } = useMutation('http://localhost:3000/api/assessments', {
+    method: 'POST',
+  })
+
   const gridRef = React.useRef<HTMLDivElement>(null)
   const [open, setOpen] = React.useState(false)
+
+  const handleAssessmentName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAssessmentName(event.target.value)
+  }
 
   const handleOpenShareModal = () => {
     setOpen(true)
@@ -75,7 +86,10 @@ export const Question = () => {
   }
 
   const saveQuestions = () => {
-    console.log(questions)
+    mutate({
+      name: assessmentName,
+      questions,
+    })
   }
 
   return (
@@ -95,7 +109,12 @@ export const Question = () => {
             <Typography>Nom interrogation:</Typography>
           </Grid>
           <Grid item>
-            <TextField placeholder="Saisissez le nom de l'interrogation" sx={{ width: 300 }} />
+            <TextField
+              placeholder="Saisissez le nom de l'interrogation"
+              sx={{ width: 300 }}
+              value={assessmentName}
+              onChange={handleAssessmentName}
+            />
           </Grid>
         </Grid>
         <Box mt={3}>
