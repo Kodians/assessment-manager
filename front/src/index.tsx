@@ -4,20 +4,15 @@ import React from 'react'
 import App from './app'
 import reportWebVitals from './reportWebVitals'
 import setupAxios from './setupAxios'
-import { CookiesProvider } from 'react-cookie'
+// import { CookiesProvider } from 'react-cookie'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 setupAxios()
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <CookiesProvider>
-        <App />
-      </CookiesProvider>
-    </BrowserRouter>
+    <App />
   </React.StrictMode>,
 )
 
