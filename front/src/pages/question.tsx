@@ -21,24 +21,10 @@ type TypeQuestion = Array<{
   responses?: Array<{ id: number; text: string }>
 }>
 
-export const Question = () => {
+export const Question = ({ appRef }: any) => {
   const [questions, setQuestions] = React.useState<TypeQuestion>([
     {
       id: 1,
-      type: 'Question choix multiple',
-      question: '',
-      responses: [
-        { id: 1, text: '' },
-        { id: 2, text: '' },
-      ],
-    },
-    {
-      id: 2,
-      type: 'Question ouverte',
-      question: '',
-    },
-    {
-      id: 3,
       type: 'Question choix multiple',
       question: '',
       responses: [
@@ -54,7 +40,6 @@ export const Question = () => {
     method: 'POST',
   })
 
-  const gridRef = React.useRef<HTMLDivElement>(null)
   const [open, setOpen] = React.useState(false)
 
   const handleAssessmentName = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -137,9 +122,9 @@ export const Question = () => {
           </Button>
         </Box>
       </Paper>
-      <div ref={gridRef}>
+      <div>
         {open && (
-          <SharedModal open={open} closeModal={() => setOpen(false)} size={getSize(gridRef)}>
+          <SharedModal open={open} closeModal={() => setOpen(false)} size={getSize(appRef)}>
             <Grid container>
               <Grid container item justifyContent={'space-between'} alignItems={'center'} sx={{ mb: '1rem' }}>
                 <Grid item>

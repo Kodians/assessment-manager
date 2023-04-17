@@ -33,7 +33,7 @@ export const QuestionCard = ({ questionNumber, deleteQuestion, question, setQues
 
   return (
     <>
-      <Card variant="outlined">
+      <Card variant="outlined" sx={{ mb: 2 }}>
         <CardContent>
           <Grid container spacing={4}>
             <Grid item mt={1}>
