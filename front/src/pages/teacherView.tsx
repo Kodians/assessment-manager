@@ -22,9 +22,6 @@ export const TeacherView: React.FC = () => {
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
         <Typography>TEACHER VIEW</Typography>
-        <Box>
-          <MultipleChoixQuestion />
-        </Box>
       </Box>
     </Box>
   )
