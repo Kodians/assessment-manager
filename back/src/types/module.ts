@@ -3,4 +3,5 @@ export interface IModule {
   moduleName: string
   moduleDescription: string
   moduleCreatedBy: number
+  moduleClasses: number[]
 }
