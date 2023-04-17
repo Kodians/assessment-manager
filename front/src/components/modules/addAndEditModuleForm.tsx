@@ -7,7 +7,6 @@ import {
   Chip,
   Divider,
   FormControl,
-  InputLabel,
   MenuItem,
   Select,
   TextField,
@@ -67,7 +66,7 @@ export const AddAndEditModuleForm = () => {
               sx={{ mb: 1 }}
             />
             <label>Classe</label>
-            <FormControl sx={{ width: '450px', marginBottom: 1 }}>
+            <FormControl sx={{ minWidth: '300px', marginBottom: 1 }}>
               <Select
                 id="classe"
                 value={name.classe}

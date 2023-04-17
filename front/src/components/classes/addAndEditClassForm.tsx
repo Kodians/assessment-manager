@@ -42,7 +42,7 @@ export const AddAndEditClassForm = () => {
   return (
     <Card>
       <CardContent>
-        <h2>Créer une nouvelle classe</h2>
+        <h2>Classe</h2>
         <Divider />
         <div style={{ display: 'flex', margin: '15px' }}>
           <form
@@ -53,10 +53,10 @@ export const AddAndEditClassForm = () => {
             }}
           >
             <label>Libellé</label>
-            <TextField style={{ width: '450px' }} value={name.label} onChange={handleLabelChange} sx={{ mb: 1 }} />
+            <TextField style={{ minWidth: '300px' }} value={name.label} onChange={handleLabelChange} sx={{ mb: 1 }} />
             <label>Code</label>
             <TextField
-              style={{ width: '450px' }}
+              style={{ minWidth: '300px' }}
               value={name.code}
               onChange={handleCodeChange}
               InputProps={{
@@ -74,7 +74,7 @@ export const AddAndEditClassForm = () => {
             />
             <label>Description</label>
             <TextField
-              style={{ width: '450px' }}
+              style={{ minWidth: '300px' }}
               value={name.description}
               onChange={handleDescriptionChange}
               multiline

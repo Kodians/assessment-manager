@@ -21,7 +21,7 @@ export const Module: React.FC = () => {
         Ajouter
       </Button>
       <SharedModal open={open} closeModal={handleClose} size={getSize(gridRef)}>
-        <Box sx={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <AddAndEditModuleForm />
         </Box>
       </SharedModal>
