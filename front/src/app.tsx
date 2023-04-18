@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Classe, Home, Module, Question, StudentView, TeacherView, Unknown } from '@pages'
+import { Classe, Connexion, Home, Inscription, Module, Question, StudentView, TeacherView, Unknown } from '@pages'
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
@@ -17,6 +17,9 @@ const App: React.FC = () => {
             <Route path="classes" element={<Classe appRef={appRef} />} />
           </Route>
           <Route path="student" element={<StudentView />} />
+          <Route path="register" element={<Inscription />} />
+          <Route path="login" element={<Connexion />} />
+
           <Route path="*" element={<Unknown />} />
         </Routes>
       </BrowserRouter>
