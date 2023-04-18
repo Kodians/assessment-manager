@@ -36,7 +36,7 @@ app.use('/api', indexRouter)
 // app.use('/api/authenticate', authenticationRouter)
 app.use('/api/user', userRouter)
 app.use('/api/classes', classRouter)
-app.use('/api/modules', moduleRouter)
-app.use('/api/assessments', assessmentRouter)
+app.use('/api/module', moduleRouter)
+app.use('/api/class_module', classModuleRouter)
 
 export default app

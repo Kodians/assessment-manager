@@ -6,7 +6,10 @@
 			"@helpers": ["src/helpers"],
 			"@models": ["src/models"],
 			"@routes": ["src/routes"],
-			"@types": ["src/types"]
+			"@types": ["src/types"],
+			"@services": ["src/services"],
+			"@enums": ["src/enums"],
+			"@errors": ["src/errors"]
 		}
 	}
 }
