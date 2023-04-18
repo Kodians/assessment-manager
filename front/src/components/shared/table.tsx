@@ -31,13 +31,13 @@ export const CustomTable = ({ headerCells, rows }: any) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row: { id: number; name: string; description: string }) => (
-            <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+          {rows?.map((row: { class_id: number; class_name: string; class_description: string }, index: number) => (
+            <TableRow key={row.class_id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {index + 1}
               </TableCell>
-              <TableCell align="left">{row.name}</TableCell>
-              <TableCell align="left">{row.description}</TableCell>
+              <TableCell align="left">{row.class_name}</TableCell>
+              <TableCell align="left">{row.class_description}</TableCell>
               <TableCell align="right">
                 <IconButton aria-label="edit">
                   <AiOutlineEdit />

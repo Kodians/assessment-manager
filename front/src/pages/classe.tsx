@@ -40,7 +40,7 @@ export const Classe: React.FC<any> = ({ appRef }: any) => {
   }
 
   useEffect(() => {
-    console.log(data)
+    console.log(data?.data)
   }, [data])
 
   return (
@@ -54,7 +54,7 @@ export const Classe: React.FC<any> = ({ appRef }: any) => {
       </Button>
       <Divider />
       {loading && <p>Loading...</p>}
-      <CustomTable headerCells={headerCells} rows={rows} />
+      <CustomTable headerCells={headerCells} rows={data?.data.data} />
       <SharedModal open={open} closeModal={handleClose} size={getSize(appRef)}>
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <AddAndEditClassForm />

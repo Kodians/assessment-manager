@@ -1,5 +1,11 @@
 import React from 'react'
 
+import Link from '@mui/material/Link'
+
 export const Auth = () => {
-  return <div>Login or Register</div>
+  return (
+    <div>
+      <Link href="/login">Login</Link> or <Link href="/register">Register</Link>
+    </div>
+  )
 }
