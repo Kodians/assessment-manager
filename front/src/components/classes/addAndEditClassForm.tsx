@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { useMutation } from '@hooks'
 import HelpIcon from '@mui/icons-material/Help'
 import {
   Button,
@@ -15,30 +16,48 @@ import Card from '@mui/material/Card'
 
 export const AddAndEditClassForm = () => {
   const [name, setName] = React.useState({
-    label: '',
-    code: '',
-    description: '',
+    className: '',
+    classCode: '',
+    classDescription: '',
   })
+
+  const { mutate } = useMutation('/classes', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
   const handleLabelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
-    setName({ ...name, label: value })
+    setName({ ...name, className: value })
   }
 
   const handleCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
-    setName({ ...name, code: value })
+    setName({ ...name, classCode: value })
   }
 
   const handleDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
-    setName({ ...name, description: value })
+    setName({ ...name, classDescription: value })
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setName({ label: '', code: '', description: '' })
+    setName({ className: '', classCode: '', classDescription: '' })
   }
   const onClose = () => void 0
+
+  const createNewClass = () => {
+    mutate({
+      className: name.className,
+      classCode: name.classCode,
+      classDescription: name.classDescription,
+    })
+    setName({ className: '', classCode: '', classDescription: '' })
+  }
+
   return (
     <Card>
       <CardContent>
@@ -53,11 +72,16 @@ export const AddAndEditClassForm = () => {
             }}
           >
             <label>Libellé</label>
-            <TextField style={{ minWidth: '300px' }} value={name.label} onChange={handleLabelChange} sx={{ mb: 1 }} />
+            <TextField
+              style={{ minWidth: '300px' }}
+              value={name.className}
+              onChange={handleLabelChange}
+              sx={{ mb: 1 }}
+            />
             <label>Code</label>
             <TextField
               style={{ minWidth: '300px' }}
-              value={name.code}
+              value={name.classCode}
               onChange={handleCodeChange}
               InputProps={{
                 endAdornment: (
@@ -75,7 +99,7 @@ export const AddAndEditClassForm = () => {
             <label>Description</label>
             <TextField
               style={{ minWidth: '300px' }}
-              value={name.description}
+              value={name.classDescription}
               onChange={handleDescriptionChange}
               multiline
               rows={4}
@@ -86,7 +110,7 @@ export const AddAndEditClassForm = () => {
               <Button variant="contained" onClick={onClose} sx={{ mr: 1, backgroundColor: 'gray' }}>
                 Fermer
               </Button>
-              <Button type="submit" variant="contained">
+              <Button type="submit" variant="contained" onClick={createNewClass}>
                 Enregistrer
               </Button>
             </CardActions>
