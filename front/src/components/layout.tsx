@@ -15,18 +15,16 @@ export const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
   // const { user } = useAuth()
   const [mobileOpen, setMobileOpen] = React.useState(false)
   return (
-    <>
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-        <Header setMobileOpen={setMobileOpen} navItems={teacherViewRoutes} />
-        <Box component="nav">
-          <SideBar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} navItems={teacherViewRoutes} />
-        </Box>
-        <Box component="main" sx={{ p: 3 }}>
-          <Toolbar />
-          {children}
-        </Box>
+    <Box>
+      <CssBaseline />
+      <Header setMobileOpen={setMobileOpen} navItems={teacherViewRoutes} />
+      <Box component="nav">
+        <SideBar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} navItems={teacherViewRoutes} />
       </Box>
-    </>
+      <Box component="main" sx={{ p: 3 }}>
+        <Toolbar />
+        {children}
+      </Box>
+    </Box>
   )
 }
