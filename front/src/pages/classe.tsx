@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { AddAndEditClassForm, CustomTable, SharedModal } from '@components'
 import { getSize } from '@helpers'
+import { useFetch } from '@hooks'
 import { Box, Button, Divider } from '@mui/material'
 
 const headerCells = [
@@ -23,12 +24,24 @@ const rows = [
 
 export const Classe: React.FC<any> = ({ appRef }: any) => {
   const [open, setOpen] = useState(false)
+  const { data, error, loading } = useFetch('/classes', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      cors: 'no-cors',
+    },
+  })
+
   const handelOpen = () => {
     setOpen(true)
   }
   const handleClose = () => {
     setOpen(false)
   }
+
+  useEffect(() => {
+    console.log(data)
+  }, [data])
 
   return (
     <div
@@ -40,6 +53,7 @@ export const Classe: React.FC<any> = ({ appRef }: any) => {
         Ajouter
       </Button>
       <Divider />
+      {loading && <p>Loading...</p>}
       <CustomTable headerCells={headerCells} rows={rows} />
       <SharedModal open={open} closeModal={handleClose} size={getSize(appRef)}>
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
