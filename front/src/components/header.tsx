@@ -7,6 +7,7 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import { NavLink } from '@types'
 
+import { AiOutlineMenu } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 
 export const Header: React.FC<any> = ({ setMobileOpen, navItems }) => {
@@ -25,10 +26,10 @@ export const Header: React.FC<any> = ({ setMobileOpen, navItems }) => {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: 'none' } }}
           >
-            {/* <MenuIcon /> */}Menu
+            <AiOutlineMenu />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
-            MUI
+            Daily Assessment
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item: NavLink) => (
