@@ -5,6 +5,6 @@ import { addUser, signinUser } from '@controllers'
 const router = express.Router()
 
 router.post('/', addUser)
-router.post('/login', signinUser)
+router.get('/login', signinUser)
 
 export { router as userRouter }
