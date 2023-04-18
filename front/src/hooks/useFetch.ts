@@ -1,6 +1,7 @@
 import React from 'react'
 
-// import { fetcher } from '@helpers'
+import { fetcher } from '@helpers'
+
 import axios, { AxiosResponse } from 'axios'
 
 export const useFetch = (url: string, options: RequestInit = {}) => {
