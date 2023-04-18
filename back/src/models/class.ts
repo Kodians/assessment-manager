@@ -40,18 +40,26 @@ export const createClass = async (classData: IClass): Promise<ResponseType<IClas
  * @returns Promise<object>
  */
 export const findClasses = async (): Promise<any> => {
-  const db = getDatabase()
-  const result = await db.query('select * from assessment_db.class')
-  //const listClass: IClass[] = [];
-  /* for (const row of result.rows) {
-    const classItem: IClass = {
-      classId: row.class_id,
-      className: row.class_name,
-      classDescription: row.class_description,
+  let response: ResponseType<IClass[]> = {
+    success: false,
+  }
+
+  try {
+    const db = getDatabase()
+    const result = await db.query('SELECT * FROM assessment_db.clas')
+    response = {
+      success: true,
+      data: result.rows,
     }
-    listClass.push(classItem);
-  }  */
-  return result
+  } catch (error: Error | any) {
+    response = {
+      success: false,
+      error,
+    }
+    throw new Error(error.message)
+  }
+
+  return response
 }
 
 /**

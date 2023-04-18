@@ -1,7 +1,6 @@
 import { Request, Response } from 'express'
 
-import { createClass } from '@models'
-import { findClasses } from '@models'
+import { createClass, findClasses } from '@models'
 import { IClass, ResponseType } from '@types'
 
 export const addClass = async (req: Request, res: Response): Promise<void> => {
@@ -29,7 +28,7 @@ export const getClasses = async (req: Request, res: Response): Promise<void> => 
   try {
     const queryResult = await findClasses()
     response = { ...response, success: queryResult.success, data: queryResult.data }
-    res.status(201).json(response)
+    res.status(200).json(response)
   } catch (error: any) {
     console.error(error)
     response = { ...response, success: false, error }
