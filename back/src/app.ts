@@ -38,5 +38,6 @@ app.use('/api/user', userRouter)
 app.use('/api/classes', classRouter)
 app.use('/api/module', moduleRouter)
 app.use('/api/class_module', classModuleRouter)
+app.use('/api/user/login', userRouter)
 
 export default app
