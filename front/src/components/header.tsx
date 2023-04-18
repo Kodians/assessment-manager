@@ -32,7 +32,7 @@ export const Header: React.FC<any> = ({ setMobileOpen, navItems }) => {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item: NavLink) => (
-              <Link to={item.path} key={item.id} style={{ color: '#fff', margin: 4 }}>
+              <Link to={item.path} key={item.id} style={{ color: '#fff', margin: 4, textDecoration: 'none' }}>
                 {item.label}
               </Link>
             ))}
