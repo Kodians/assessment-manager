@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { useFetch } from '@hooks'
 import { Button } from '@mui/material'
 import Box from '@mui/material/Box'
 import MenuItem from '@mui/material/MenuItem'
@@ -26,6 +27,14 @@ const currencies = [
 ]
 
 export const AssessmentRelatedClassAndModuleForm = () => {
+  const { data, loading } = useFetch('/classes', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      cors: 'no-cors',
+    },
+  })
+
   return (
     <Box
       component="form"
@@ -37,11 +46,15 @@ export const AssessmentRelatedClassAndModuleForm = () => {
     >
       <div>
         <TextField fullWidth select label="Selectionnez la classe">
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
+          {(loading || !data?.data.success) && <p>Loading...</p>}
+          {data?.data.data.map((item: { class_id: number; class_name: string; class_description: string }) => {
+            console.log(item)
+            return (
+              <MenuItem key={item.class_id} value={item.class_id}>
+                {item.class_name}
+              </MenuItem>
+            )
+          })}
         </TextField>
         <TextField fullWidth select label="Selectionnez le module">
           {currencies.map((option) => (
