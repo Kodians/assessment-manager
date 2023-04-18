@@ -23,7 +23,16 @@ export const AssessmentRelatedClassAndModule = () => {
   }
 
   return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', overflow: 'auto', maxHeight: 420 }}>
+    <List
+      sx={{
+        width: '100%',
+        maxWidth: 370,
+        bgcolor: 'background.paper',
+        overflowY: 'scroll',
+        overflowX: 'hidden',
+        maxHeight: 420,
+      }}
+    >
       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value, index, arr) => (
         <ListItem
           key={value}
