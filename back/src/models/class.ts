@@ -46,7 +46,7 @@ export const findClasses = async (): Promise<any> => {
 
   try {
     const db = getDatabase()
-    const result = await db.query('SELECT * FROM assessment_db.clas')
+    const result = await db.query('SELECT * FROM assessment_db.class')
     response = {
       success: true,
       data: result.rows,
