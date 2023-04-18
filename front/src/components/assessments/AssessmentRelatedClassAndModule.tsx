@@ -33,11 +33,7 @@ export const AssessmentRelatedClassAndModule = () => {
         maxHeight: 420,
       }}
     >
-      {[
-        { name: 'Miage M2 - Alternance' },
-        { name: 'Miage M2 - Formation Initiale' },
-        { name: 'Miage M1 - Alternance' },
-      ].map((item, index, arr) => (
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value, index, arr) => (
         <ListItem
           key={item.name}
           onMouseEnter={() => handleMouseEnter(index)}
