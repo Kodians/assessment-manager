@@ -27,13 +27,13 @@ const currencies = [
 ]
 
 export const AssessmentRelatedClassAndModuleForm = () => {
-  const { data, loading } = useFetch('/classes', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      cors: 'no-cors',
-    },
-  })
+  // const { data, loading } = useFetch('/classes', {
+  //   method: 'GET',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     cors: 'no-cors',
+  //   },
+  // })
 
   return (
     <Box
@@ -46,22 +46,22 @@ export const AssessmentRelatedClassAndModuleForm = () => {
     >
       <div>
         <TextField fullWidth select label="Selectionnez la classe">
-          {(loading || !data?.data.success) && <p>Loading...</p>}
-          {data?.data.data.map((item: { class_id: number; class_name: string; class_description: string }) => {
+          {/* {(loading || !data?.data.success) && <p>Loading...</p>} */}
+          {/* {data?.data.data.map((item: { class_id: number; class_name: string; class_description: string }) => {
             console.log(item)
             return (
               <MenuItem key={item.class_id} value={item.class_id}>
                 {item.class_name}
               </MenuItem>
             )
-          })}
+          })} */}
         </TextField>
         <TextField fullWidth select label="Selectionnez le module">
-          {currencies.map((option) => (
+          {/* {currencies.map((option) => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
             </MenuItem>
-          ))}
+          ))} */}
         </TextField>
       </div>
       <div>

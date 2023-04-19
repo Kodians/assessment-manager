@@ -10,7 +10,7 @@ const App: React.FC = () => {
     <div className="App" ref={appRef}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Connexion />} />
           <Route path="teacher" element={<TeacherView />}>
             <Route path="interrogations" element={<Question appRef={appRef} />} />
             <Route path="modules" element={<Module appRef={appRef} />} />
