@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { AddAndEditClassForm, CustomTable, SharedModal } from '@components'
 import { getSize } from '@helpers'
 import { useFetch } from '@hooks'
-import { Box, Button, Divider } from '@mui/material'
+import { Box, Button, Divider, Typography } from '@mui/material'
 
 const headerCells = [
   { id: 'id', label: 'ID' },
@@ -14,7 +14,7 @@ const headerCells = [
 
 export const Classe: React.FC<any> = ({ appRef }: any) => {
   const [open, setOpen] = useState(false)
-  const { data, error, loading } = useFetch('/classes', {
+  const { data, loading } = useFetch('/classes', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export const Classe: React.FC<any> = ({ appRef }: any) => {
   }
 
   useEffect(() => {
-    console.log(data)
+    console.log(data?.data)
   }, [data])
 
   return (
@@ -51,7 +51,7 @@ export const Classe: React.FC<any> = ({ appRef }: any) => {
       </Button>
       <Divider />
       {loading && <p>Loading...</p>}
-      <CustomTable headerCells={headerCells} rows={rows} />
+      <CustomTable headerCells={headerCells} rows={data?.data.data} />
       <SharedModal open={open} closeModal={handleClose} size={getSize(appRef)}>
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <AddAndEditClassForm />
