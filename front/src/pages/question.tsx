@@ -78,23 +78,7 @@ export const Question = ({ appRef }: any) => {
     },
   ])
 
-  const [assessments, setAssessments] = React.useState<any>([
-    {
-      id: 1,
-      name: 'Interrogation 1',
-      questions: [
-        {
-          id: 1,
-          type: 'Question choix multiple',
-          question: 'Quelle est la capitale de la France ?',
-          responses: [
-            { id: 1, text: 'Paris' },
-            { id: 2, text: 'Lyon' },
-          ],
-        },
-      ],
-    },
-  ])
+  const [assessments, setAssessments] = React.useState<any>()
 
   const [assessmentName, setAssessmentName] = React.useState<string>('')
 
@@ -175,7 +159,7 @@ export const Question = ({ appRef }: any) => {
               sx={{ fontweight: 'bold', fontSize: 16, display: 'flex', justifyContent: 'flex-end' }}
             />
           </ListItem>
-          {assessments.map((assessment: any) => (
+          {/* {assessments.map((assessment: any) => (
             <ListItem key={assessment.id} divider sx={{ display: 'flex', justifyContent: 'center' }}>
               <ListItemText primary={assessment.name} />
               <ListItemText primary={assessment.questions.length} />
@@ -185,7 +169,7 @@ export const Question = ({ appRef }: any) => {
                 </IconButton>
               </ListItemText>
             </ListItem>
-          ))}
+          ))} */}
         </List>
       </TabPanel>
       <TabPanel value={value} index={1}>

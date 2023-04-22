@@ -8,6 +8,7 @@ import Form from './form'
 import axios from 'axios'
 import { useSnackbar } from 'notistack'
 import { Controller, useForm } from 'react-hook-form'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export const Login: React.FC = () => {
   document.title = 'Register - ProjectName'
@@ -34,20 +35,19 @@ export const Login: React.FC = () => {
     formState: { errors },
   } = useForm()
 
+  const navigate = useNavigate()
+
   const { enqueueSnackbar } = useSnackbar()
 
-  const submitHandler = async ({ login, password, firstname, lastname, confirmPassword }: any) => {
-    if (password !== confirmPassword) {
-      enqueueSnackbar('Les mots de passe ne correspondent pas', {
-        variant: 'error',
-      })
-      return
-    }
+  const submitHandler = async ({ login, password }: any) => {
     try {
-      await axios.post('http://localhost:2000/api/user/login', {
+      const { data } = await axios.post('http://localhost:2000/api/user/login', {
         login,
         password,
       })
+
+      console.log('user====', data)
+      navigate('/teacher')
     } catch (err) {
       enqueueSnackbar(getError(err), { variant: 'error' })
     }
@@ -55,7 +55,7 @@ export const Login: React.FC = () => {
 
   return (
     <Form onSubmit={handleSubmit(submitHandler)}>
-      <Typography component="h1" variant="h1">
+      <Typography component="h1" variant="h3">
         Connexion
       </Typography>
       <List>
@@ -123,7 +123,7 @@ export const Login: React.FC = () => {
           </Button>
         </ListItem>
         <ListItem>
-          Pas de compte? <Link href="/login">Inscription</Link>
+          Pas de compte? <Link href="/register">Inscription</Link>
         </ListItem>
       </List>
     </Form>

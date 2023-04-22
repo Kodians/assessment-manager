@@ -50,7 +50,7 @@ export const signinUser = async (request: Request, response: Response): Promise<
         console.error(`L'utilisateur n'existe pas`)
 
         return response.status(HttpStatusCode.UNAUTHORISED).json({
-          errors: `Votre email est incorrect`,
+          errors: `Votre nom d'utilisateur est incorrect`,
         })
       }
 
