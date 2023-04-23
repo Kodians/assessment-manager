@@ -12,22 +12,6 @@ import { Controller, useForm } from 'react-hook-form'
 export const Register: React.FC = () => {
   document.title = 'Register - ProjectName'
 
-  const { register } = useAuth()
-
-  const [username, setUsername] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const [confirmation, setConfirmation] = useState<string>('')
-  const [error, setError] = useState<string | null>()
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const response = await register(username, password, confirmation)
-
-    if (response && !response.success) {
-      setError(response.error)
-    }
-  }
-
   const {
     handleSubmit,
     control,
