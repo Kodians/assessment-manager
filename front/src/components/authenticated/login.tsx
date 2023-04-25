@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { useAuth } from '@hooks'
-import { Button, Link, List, ListItem, TextField, Typography } from '@mui/material'
+import { Alert, Button, Link, List, ListItem, TextField, Typography } from '@mui/material'
 
 import { getError } from '../../utils/error'
 import Form from './form'
@@ -13,21 +13,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 export const Login: React.FC = () => {
   document.title = 'Register - ProjectName'
 
-  const { register } = useAuth()
-
-  const [username, setUsername] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const [confirmation, setConfirmation] = useState<string>('')
-  const [error, setError] = useState<string | null>()
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const response = await register(username, password, confirmation)
-
-    if (response && !response.success) {
-      setError(response.error)
-    }
-  }
+  const [error, setError] = useState(false)
 
   const {
     handleSubmit,
@@ -46,15 +32,16 @@ export const Login: React.FC = () => {
         password,
       })
 
-      console.log('user====', data)
       navigate('/teacher')
     } catch (err) {
+      setError(true)
       enqueueSnackbar(getError(err), { variant: 'error' })
     }
   }
 
   return (
     <Form onSubmit={handleSubmit(submitHandler)}>
+      {error && <Alert severity="error">Nom utilsateur ou mot de passe incorrect</Alert>}
       <Typography component="h1" variant="h3">
         Connexion
       </Typography>
