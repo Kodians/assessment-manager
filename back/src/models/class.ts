@@ -10,15 +10,15 @@ import { QueryResult } from 'pg'
  */
 export const createClass = async (classData: IClass): Promise<ResponseType<IClass>> => {
   const db = getDatabase()
-  const { className, classDescription } = classData
+  const { className, classCode, classDescription } = classData
 
   let response: ResponseType<IClass> = {
     success: false,
   }
   try {
     const query = {
-      text: 'INSERT INTO assessment_db.class(class_name, class_description) VALUES($1, $2) RETURNING *',
-      values: [className, classDescription],
+      text: 'INSERT INTO assessment_db.class(class_name, class_code, class_description) VALUES($1, $2, $3) RETURNING *',
+      values: [className, classCode, classDescription],
     }
 
     const result: QueryResult<IClass> = await db.query(query)
@@ -85,7 +85,7 @@ export const updateClass = async (classId: number, classData: unknown): Promise<
 export const removeClass = async (classId: number): Promise<any> => {}
 
 /* -------------------------------------------------------------------------- */
-/*                                 RELATIONSHIP BETWEEN CLASS AND STUDENT                                   */
+/*                                 RELATIONSHIP BETWEEN CLASS AND STUDENT     */
 /* -------------------------------------------------------------------------- */
 
 /**
@@ -104,7 +104,7 @@ export const createStudentInClass = async (classId: number, studentData: unknown
 export const findStudentsByClassId = async (classId: number): Promise<any> => {}
 
 /* -------------------------------------------------------------------------- */
-/*                                 RELATIONSHIP BETWEEN CLASS AND MODULE                                   */
+/*                                 RELATIONSHIP BETWEEN CLASS AND MODULE      */
 /* -------------------------------------------------------------------------- */
 
 /**

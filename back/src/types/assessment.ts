@@ -1,3 +1,5 @@
+import { IQuestion } from '@types'
+
 export interface IAssessment {
   assessmentId?: number
   assessmentName: string
@@ -5,4 +7,5 @@ export interface IAssessment {
   assessmentCreatedBy: Date
   assessmentCreatedDate: Date
   assessmentModifiedDate: Date
+  assessmentQuestions?: IQuestion[]
 }

@@ -79,7 +79,7 @@ CREATE  TABLE assessment_db.assessment_answer (
 	assessment_answer_active boolean,
 	assessment_answer_content text,
 	assessment_answer_picture varchar(255),
-	assessment_question_id integer,
+	assessment_question_id integer NOT NULL,
 	CONSTRAINT pk_assessment_answer PRIMARY KEY ( assessment_answer_id )
  );
 
