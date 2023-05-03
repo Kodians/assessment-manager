@@ -15,12 +15,18 @@ import {
   Typography,
 } from '@mui/material'
 
-export const QuestionCard = ({ questionNumber, deleteQuestion, question, setQuestions, QuestionTypesEnum }: any) => {
+export const QuestionCard = ({
+  questionNumber,
+  deleteQuestion,
+  question,
+  setAssessmentQuestions,
+  QuestionTypesEnum,
+}: any) => {
   const [questionType, setQuestionType] = useState<string>(question.type)
 
   const handleChangeQuestionType = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuestionType(event.target.value)
-    setQuestions((prevState: any) => {
+    setAssessmentQuestions((prevState: any) => {
       const newState = prevState.map((item: any) => {
         if (item.id === question.id) {
           item.type = event.target.value
@@ -83,11 +89,11 @@ export const QuestionCard = ({ questionNumber, deleteQuestion, question, setQues
 
         {questionType.includes(QuestionTypesEnum.multiple) ? (
           <CardContent>
-            <MultipleChoixQuestion question={question} setQuestions={setQuestions} />
+            <MultipleChoixQuestion question={question} setAssessmentQuestions={setAssessmentQuestions} />
           </CardContent>
         ) : (
           <CardContent>
-            <OpenQuestion question={question} setQuestions={setQuestions} />
+            <OpenQuestion question={question} setAssessmentQuestions={setAssessmentQuestions} />
           </CardContent>
         )}
       </Card>

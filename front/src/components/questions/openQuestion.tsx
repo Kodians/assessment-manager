@@ -2,10 +2,10 @@ import React from 'react'
 
 import { TextField } from '@mui/material'
 
-export const OpenQuestion = ({ question, setQuestions }: any) => {
+export const OpenQuestion = ({ question, setAssessmentQuestions }: any) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
-    setQuestions((prevQuestions: any) => {
+    setAssessmentQuestions((prevQuestions: any) => {
       const newQuestions = prevQuestions.map((prevQuestion: any) => {
         if (prevQuestion.id === question.id) {
           return { ...prevQuestion, question: value }

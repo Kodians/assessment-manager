@@ -23,7 +23,7 @@ type TypeQuestion = Array<{
   id: number
   type: string
   question: string
-  responses?: Array<{ id: number; text: string }>
+  questionAnswers?: Array<{ id: number; text: string }>
 }>
 
 interface TabPanelProps {
@@ -71,12 +71,12 @@ export const Question = ({ appRef }: any) => {
   const handleTabChange = (event: React.SyntheticEvent, newValue: number | string) => {
     setTabValue(newValue)
   }
-  const [questions, setQuestions] = React.useState<TypeQuestion>([
+  const [assessmentQuestions, setAssessmentQuestions] = React.useState<TypeQuestion>([
     {
       id: 1,
       type: QuestionTypesEnum.multiple,
       question: '',
-      responses: [
+      questionAnswers: [
         { id: 1, text: '' },
         { id: 2, text: '' },
       ],
@@ -103,15 +103,15 @@ export const Question = ({ appRef }: any) => {
 
   const addQuestion = () => {
     const newQuestion = {
-      id: questions.length + 1,
+      id: assessmentQuestions.length + 1,
       type: QuestionTypesEnum.ouverte,
       question: '',
     }
-    setQuestions([...questions, newQuestion])
+    setAssessmentQuestions([...assessmentQuestions, newQuestion])
   }
 
   const deleteQuestion = (question: any) => {
-    setQuestions((prevQuestions: any) => {
+    setAssessmentQuestions((prevQuestions: any) => {
       const newQuestions = prevQuestions.filter((prevQuestion: any) => prevQuestion.id !== question.id)
       return newQuestions
     })
@@ -135,8 +135,10 @@ export const Question = ({ appRef }: any) => {
 
   const saveQuestions = () => {
     console.log({
-      name: assessmentName,
-      questions,
+      assessmentName,
+      assessmentDescription: '',
+      assessmentCreatedBy: '',
+      assessmentQuestions,
     })
     // mutate({
     //   name: assessmentName,
@@ -203,11 +205,11 @@ export const Question = ({ appRef }: any) => {
             </Grid>
           </Grid>
           <Box mt={3}>
-            {questions.map((question) => (
+            {assessmentQuestions.map((question) => (
               <QuestionCard
                 questionNumber={question.id}
                 question={question}
-                setQuestions={setQuestions}
+                setAssessmentQuestions={setAssessmentQuestions}
                 deleteQuestion={deleteQuestion}
                 QuestionTypesEnum={QuestionTypesEnum}
                 key={question.id}

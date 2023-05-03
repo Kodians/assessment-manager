@@ -4,15 +4,18 @@ import { Button, Grid, Paper, TextField, Typography } from '@mui/material'
 
 import { AiOutlineMinus } from 'react-icons/ai'
 
-export const MultipleChoixQuestion = ({ question, setQuestions }: any) => {
+export const MultipleChoixQuestion = ({ question, setAssessmentQuestions }: any) => {
   // Ajouter une réponse
   const addMoreAnswers = () => {
-    setQuestions((prevQuestions: any) => {
+    setAssessmentQuestions((prevQuestions: any) => {
       const newQuestions = prevQuestions.map((prevQuestion: any) => {
         if (prevQuestion.id === question.id) {
           return {
             ...prevQuestion,
-            responses: [...prevQuestion.responses, { id: prevQuestion.responses.length + 1, text: '' }],
+            questionAnswers: [
+              ...prevQuestion.questionAnswers,
+              { id: prevQuestion.questionAnswers.length + 1, text: '' },
+            ],
           }
         }
         return prevQuestion
@@ -23,17 +26,17 @@ export const MultipleChoixQuestion = ({ question, setQuestions }: any) => {
 
   // Supprimer une réponse
   const removeAnswer = (id: number) => {
-    setQuestions((prevQuestions: any) => {
+    setAssessmentQuestions((prevQuestions: any) => {
       const newQuestions = prevQuestions.map((prevQuestion: any) => {
         if (prevQuestion.id === question.id) {
-          const { responses } = prevQuestion
-          const index = responses.findIndex((response: any) => response.id === id)
-          if (index === -1 || responses.length === 1) {
+          const { questionAnswers } = prevQuestion
+          const index = questionAnswers.findIndex((response: any) => response.id === id)
+          if (index === -1 || questionAnswers.length === 1) {
             return prevQuestion
           }
           return {
             ...prevQuestion,
-            responses: [...responses.slice(0, index), ...responses.slice(index + 1)],
+            questionAnswers: [...questionAnswers.slice(0, index), ...questionAnswers.slice(index + 1)],
           }
         }
         return prevQuestion
@@ -47,7 +50,7 @@ export const MultipleChoixQuestion = ({ question, setQuestions }: any) => {
     const { value, id } = event.target
 
     // changer la question
-    setQuestions((prevQuestions: any) => {
+    setAssessmentQuestions((prevQuestions: any) => {
       const newQuestions = prevQuestions.map((prevQuestion: any) => {
         if (prevQuestion.id === question.id) {
           const { question } = prevQuestion
@@ -61,17 +64,17 @@ export const MultipleChoixQuestion = ({ question, setQuestions }: any) => {
     })
 
     // Modifier une réponse
-    setQuestions((prevQuestions: any) => {
+    setAssessmentQuestions((prevQuestions: any) => {
       const newQuestions = prevQuestions.map((prevQuestion: any) => {
         if (prevQuestion.id === question.id) {
-          const { responses } = prevQuestion
-          const newResponses = responses.map((response: any) => {
+          const { questionAnswers } = prevQuestion
+          const newquestionAnswers = questionAnswers.map((response: any) => {
             if (response.id === Number(id)) {
               return { ...response, text: value }
             }
             return response
           })
-          return { ...prevQuestion, responses: newResponses }
+          return { ...prevQuestion, questionAnswers: newquestionAnswers }
         }
         return prevQuestion
       })
@@ -96,7 +99,7 @@ export const MultipleChoixQuestion = ({ question, setQuestions }: any) => {
           <Typography sx={{ width: 80 }}>Choix : </Typography>
         </Grid>
         <Grid item>
-          {question?.responses?.map((response: any) => (
+          {question?.questionAnswers?.map((response: any) => (
             <div key={response.id} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 30 }}>
               <TextField
                 placeholder="Saisissez une réponse"
@@ -104,7 +107,7 @@ export const MultipleChoixQuestion = ({ question, setQuestions }: any) => {
                 id={response.id.toString()}
                 onChange={handleChange}
               />
-              {question?.responses.length > 1 && (
+              {question?.questionAnswers.length > 1 && (
                 <Button type="button" onClick={() => removeAnswer(response.id)} sx={{ width: 10, padding: 0 }}>
                   <AiOutlineMinus />
                 </Button>
