@@ -3,7 +3,7 @@ import React from 'react'
 import { QuestionCard } from '@components'
 import { AssessmentRelatedClassAndModuleContainter, SharedModal } from '@components'
 import { getSize } from '@helpers'
-import { useMutation } from '@hooks'
+// import { useMutation } from '@hooks'
 import { IconButton } from '@mui/material'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -30,6 +30,11 @@ interface TabPanelProps {
   children?: React.ReactNode
   index: number
   value: number | string
+}
+
+enum QuestionTypesEnum {
+  multiple = 'Question choix multiple',
+  ouverte = 'Question ouverte',
 }
 
 function TabPanel(props: TabPanelProps) {
@@ -61,15 +66,15 @@ function a11yProps(index: number) {
 }
 
 export const Question = ({ appRef }: any) => {
-  const [value, setValue] = React.useState<number | string>(0)
+  const [tabValue, setTabValue] = React.useState<number | string>(0)
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number | string) => {
-    setValue(newValue)
+  const handleTabChange = (event: React.SyntheticEvent, newValue: number | string) => {
+    setTabValue(newValue)
   }
   const [questions, setQuestions] = React.useState<TypeQuestion>([
     {
       id: 1,
-      type: 'Question choix multiple',
+      type: QuestionTypesEnum.multiple,
       question: '',
       responses: [
         { id: 1, text: '' },
@@ -78,13 +83,13 @@ export const Question = ({ appRef }: any) => {
     },
   ])
 
-  const [assessments, setAssessments] = React.useState<any>()
+  // const [assessments, setAssessments] = React.useState<any>()
 
   const [assessmentName, setAssessmentName] = React.useState<string>('')
 
-  const { mutate } = useMutation('http://localhost:3000/api/assessments', {
-    method: 'POST',
-  })
+  // const { mutate } = useMutation('http://localhost:3000/api/assessments', {
+  //   method: 'POST',
+  // })
 
   const [open, setOpen] = React.useState(false)
 
@@ -99,16 +104,10 @@ export const Question = ({ appRef }: any) => {
   const addQuestion = () => {
     const newQuestion = {
       id: questions.length + 1,
-      type: 'Question choix multiple',
+      type: QuestionTypesEnum.ouverte,
       question: '',
-      responses: [
-        { id: 1, text: '' },
-        { id: 2, text: '' },
-      ],
     }
     setQuestions([...questions, newQuestion])
-
-    addAssessment()
   }
 
   const deleteQuestion = (question: any) => {
@@ -118,7 +117,7 @@ export const Question = ({ appRef }: any) => {
     })
   }
 
-  const addAssessment = () => {
+  /*const addAssessment = () => {
     const newAssessment = {
       id: assessments.length + 1,
       name: assessmentName,
@@ -132,24 +131,28 @@ export const Question = ({ appRef }: any) => {
       const newAssessments = prevAssessments.filter((prevAssessment: any) => prevAssessment.id !== assessment.id)
       return newAssessments
     })
-  }
+  }*/
 
   const saveQuestions = () => {
-    mutate({
+    console.log({
       name: assessmentName,
       questions,
     })
+    // mutate({
+    //   name: assessmentName,
+    //   questions,
+    // })
   }
 
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider', width: '100%' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+        <Tabs value={tabValue} onChange={handleTabChange} aria-label="basic tabs example">
           <Tab label="Intérrogations" {...a11yProps(0)} />
           <Tab label="Créer une intérrogation" {...a11yProps(1)} />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={tabValue} index={0}>
         <List>
           <ListItem divider sx={{ backgroundColor: '#efefef', display: 'flex', justifyContent: 'space-between' }}>
             <ListItemText primary="Nom interrogation" sx={{ fontweight: 'bold', fontSize: 16 }} />
@@ -159,20 +162,23 @@ export const Question = ({ appRef }: any) => {
               sx={{ fontweight: 'bold', fontSize: 16, display: 'flex', justifyContent: 'flex-end' }}
             />
           </ListItem>
-          {/* {assessments.map((assessment: any) => (
+          {[
+            { id: 1, name: 'Interrogation 1', questions: [{ id: 1, question: 'Question 1' }] },
+            { id: 2, name: 'Interrogation 2', questions: [{ id: 1, question: 'Question 1' }] },
+          ].map((assessment: any) => (
             <ListItem key={assessment.id} divider sx={{ display: 'flex', justifyContent: 'center' }}>
               <ListItemText primary={assessment.name} />
               <ListItemText primary={assessment.questions.length} />
               <ListItemText sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <IconButton edge="end" aria-label="delete">
-                  <ImCancelCircle onClick={() => removeAssessment(assessment)} />
+                  <ImCancelCircle />
                 </IconButton>
               </ListItemText>
             </ListItem>
-          ))} */}
+          ))}
         </List>
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel value={tabValue} index={1}>
         <Paper sx={{ p: 0.5, '& > div': { marginBottom: 5 }, border: '1px solid #e0e0e0' }} elevation={0}>
           <Button
             type="button"
@@ -203,6 +209,7 @@ export const Question = ({ appRef }: any) => {
                 question={question}
                 setQuestions={setQuestions}
                 deleteQuestion={deleteQuestion}
+                QuestionTypesEnum={QuestionTypesEnum}
                 key={question.id}
               />
             ))}

@@ -15,16 +15,20 @@ import {
   Typography,
 } from '@mui/material'
 
-enum QuestionType {
-  multiple = 'Question choix multiple',
-  ouverte = 'Question ouverte',
-}
-
-export const QuestionCard = ({ questionNumber, deleteQuestion, question, setQuestions }: any) => {
-  const [questionType, setQuestionType] = useState<string>(QuestionType.ouverte)
+export const QuestionCard = ({ questionNumber, deleteQuestion, question, setQuestions, QuestionTypesEnum }: any) => {
+  const [questionType, setQuestionType] = useState<string>(question.type)
 
   const handleChangeQuestionType = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuestionType(event.target.value)
+    setQuestions((prevState: any) => {
+      const newState = prevState.map((item: any) => {
+        if (item.id === question.id) {
+          item.type = event.target.value
+        }
+        return item
+      })
+      return newState
+    })
   }
 
   const removeQuestion = () => {
@@ -49,8 +53,16 @@ export const QuestionCard = ({ questionNumber, deleteQuestion, question, setQues
                   onChange={handleChangeQuestionType}
                   name="radio-buttons-group"
                 >
-                  <FormControlLabel value={QuestionType.multiple} control={<Radio />} label={QuestionType.multiple} />
-                  <FormControlLabel value={QuestionType.ouverte} control={<Radio />} label={QuestionType.ouverte} />
+                  <FormControlLabel
+                    value={QuestionTypesEnum.multiple}
+                    control={<Radio />}
+                    label={QuestionTypesEnum.multiple}
+                  />
+                  <FormControlLabel
+                    value={QuestionTypesEnum.ouverte}
+                    control={<Radio />}
+                    label={QuestionTypesEnum.ouverte}
+                  />
                 </RadioGroup>
               </FormControl>
             </Grid>
@@ -69,7 +81,7 @@ export const QuestionCard = ({ questionNumber, deleteQuestion, question, setQues
           </Box>
         </CardContent>
 
-        {questionType.includes(QuestionType.multiple) ? (
+        {questionType.includes(QuestionTypesEnum.multiple) ? (
           <CardContent>
             <MultipleChoixQuestion question={question} setQuestions={setQuestions} />
           </CardContent>
