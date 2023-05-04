@@ -3,7 +3,7 @@ import React from 'react'
 import { QuestionCard } from '@components'
 import { AssessmentRelatedClassAndModuleContainter, SharedModal } from '@components'
 import { getSize } from '@helpers'
-// import { useMutation } from '@hooks'
+import { useMutation } from '@hooks'
 import { IconButton } from '@mui/material'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -87,9 +87,12 @@ export const Question = ({ appRef }: any) => {
 
   const [assessmentName, setAssessmentName] = React.useState<string>('')
 
-  // const { mutate } = useMutation('http://localhost:3000/api/assessments', {
-  //   method: 'POST',
-  // })
+  const { mutate } = useMutation('/assessments', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
 
   const [open, setOpen] = React.useState(false)
 
@@ -134,16 +137,12 @@ export const Question = ({ appRef }: any) => {
   }*/
 
   const saveQuestions = () => {
-    console.log({
+    mutate({
       assessmentName,
-      assessmentDescription: '',
-      assessmentCreatedBy: '',
-      assessmentQuestions,
+      assessmentDescription: 'Simple description',
+      //assessmentCreatedBy: '',
+      //assessmentQuestions,
     })
-    // mutate({
-    //   name: assessmentName,
-    //   questions,
-    // })
   }
 
   return (

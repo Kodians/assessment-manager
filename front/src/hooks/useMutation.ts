@@ -9,7 +9,7 @@ export const useMutation = (url: string, options: RequestInit = {}) => {
 
   const mutate = React.useCallback(async (body: any) => {
     setLoading(true)
-
+    console.log(body, 'body')
     try {
       const response = await fetcher(url, {
         ...options,
@@ -23,6 +23,8 @@ export const useMutation = (url: string, options: RequestInit = {}) => {
       setLoading(false)
     }
   }, [])
+
+  console.log(data, 'data')
 
   return { data, error, loading, mutate }
 }
