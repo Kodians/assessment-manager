@@ -21,9 +21,9 @@ import { ImCancelCircle } from 'react-icons/im'
 
 type TypeQuestion = Array<{
   id: number
-  type: string
-  question: string
-  questionAnswers?: Array<{ id: number; text: string }>
+  questionType: string
+  questionContent: string
+  questionAnswers?: Array<{ id: number; answerContent: string }>
 }>
 
 interface TabPanelProps {
@@ -68,17 +68,17 @@ function a11yProps(index: number) {
 export const Question = ({ appRef }: any) => {
   const [tabValue, setTabValue] = React.useState<number | string>(0)
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number | string) => {
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number | string) => {
     setTabValue(newValue)
   }
   const [assessmentQuestions, setAssessmentQuestions] = React.useState<TypeQuestion>([
     {
       id: 1,
-      type: QuestionTypesEnum.multiple,
-      question: '',
+      questionType: QuestionTypesEnum.multiple,
+      questionContent: '',
       questionAnswers: [
-        { id: 1, text: '' },
-        { id: 2, text: '' },
+        { id: 1, answerContent: '' },
+        { id: 2, answerContent: '' },
       ],
     },
   ])
@@ -107,8 +107,8 @@ export const Question = ({ appRef }: any) => {
   const addQuestion = () => {
     const newQuestion = {
       id: assessmentQuestions.length + 1,
-      type: QuestionTypesEnum.ouverte,
-      question: '',
+      questionType: QuestionTypesEnum.ouverte,
+      questionContent: '',
     }
     setAssessmentQuestions([...assessmentQuestions, newQuestion])
   }
@@ -120,26 +120,11 @@ export const Question = ({ appRef }: any) => {
     })
   }
 
-  /*const addAssessment = () => {
-    const newAssessment = {
-      id: assessments.length + 1,
-      name: assessmentName,
-      questions,
-    }
-    setAssessments([...assessments, newAssessment])
-  }
-
-  const removeAssessment = (assessment: any) => {
-    setAssessments((prevAssessments: any) => {
-      const newAssessments = prevAssessments.filter((prevAssessment: any) => prevAssessment.id !== assessment.id)
-      return newAssessments
-    })
-  }*/
-
   const saveQuestions = () => {
     mutate({
       assessmentName,
       assessmentDescription: 'Simple description',
+      assessmentQuestions,
       //assessmentCreatedBy: '',
       //assessmentQuestions,
     })

@@ -22,7 +22,7 @@ export const QuestionCard = ({
   setAssessmentQuestions,
   QuestionTypesEnum,
 }: any) => {
-  const [questionType, setQuestionType] = useState<string>(question.type)
+  const [questionType, setQuestionType] = useState<string>(question.questionType)
 
   const handleChangeQuestionType = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuestionType(event.target.value)

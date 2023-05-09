@@ -14,7 +14,7 @@ export const MultipleChoixQuestion = ({ question, setAssessmentQuestions }: any)
             ...prevQuestion,
             questionAnswers: [
               ...prevQuestion.questionAnswers,
-              { id: prevQuestion.questionAnswers.length + 1, text: '' },
+              { id: prevQuestion.questionAnswers.length + 1, answerContent: '' },
             ],
           }
         }
@@ -53,9 +53,9 @@ export const MultipleChoixQuestion = ({ question, setAssessmentQuestions }: any)
     setAssessmentQuestions((prevQuestions: any) => {
       const newQuestions = prevQuestions.map((prevQuestion: any) => {
         if (prevQuestion.id === question.id) {
-          const { question } = prevQuestion
-          if (question === id) {
-            return { ...prevQuestion, question: value }
+          const { questionContent } = prevQuestion
+          if (questionContent === id) {
+            return { ...prevQuestion, questionContent: value }
           }
         }
         return prevQuestion
@@ -70,7 +70,7 @@ export const MultipleChoixQuestion = ({ question, setAssessmentQuestions }: any)
           const { questionAnswers } = prevQuestion
           const newquestionAnswers = questionAnswers.map((response: any) => {
             if (response.id === Number(id)) {
-              return { ...response, text: value }
+              return { ...response, answerContent: value }
             }
             return response
           })
@@ -90,7 +90,12 @@ export const MultipleChoixQuestion = ({ question, setAssessmentQuestions }: any)
         </Grid>
         <Grid item>
           <Typography>
-            <TextField placeholder="Saisissez la question" id={question.question} onChange={handleChange} />
+            <TextField
+              placeholder="Saisissez la question"
+              value={question.questionContent}
+              id={question.questionContent}
+              onChange={handleChange}
+            />
           </Typography>
         </Grid>
       </Grid>
@@ -103,7 +108,7 @@ export const MultipleChoixQuestion = ({ question, setAssessmentQuestions }: any)
             <div key={response.id} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 30 }}>
               <TextField
                 placeholder="Saisissez une réponse"
-                value={response.text}
+                value={response.answerContent}
                 id={response.id.toString()}
                 onChange={handleChange}
               />

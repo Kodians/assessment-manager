@@ -8,7 +8,7 @@ export const OpenQuestion = ({ question, setAssessmentQuestions }: any) => {
     setAssessmentQuestions((prevQuestions: any) => {
       const newQuestions = prevQuestions.map((prevQuestion: any) => {
         if (prevQuestion.id === question.id) {
-          return { ...prevQuestion, question: value }
+          return { ...prevQuestion, questionContent: value }
         }
         return prevQuestion
       })
@@ -24,7 +24,7 @@ export const OpenQuestion = ({ question, setAssessmentQuestions }: any) => {
         size="small"
         id="openQuestion"
         variant="outlined"
-        value={question.question}
+        value={question.questionContent}
         onChange={handleChange}
       />
     </div>

@@ -24,7 +24,5 @@ export const useMutation = (url: string, options: RequestInit = {}) => {
     }
   }, [])
 
-  console.log(data, 'data')
-
   return { data, error, loading, mutate }
 }
